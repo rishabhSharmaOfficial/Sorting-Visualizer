@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Sorting Visualizer</title>
+</head>
+
+<body>
+    <!-- <div id="e0" class="element" style="background-color: deepskyblue; width: 30px; height: 50px"></div> -->
+    <div class="container">
+        <div id="array-container">
+            <div id="array"></div>
+            <h5 id="no-algo-warning" class="display-none">No Algorithm Selected!</h5>
+        </div>
+        <div id="algo-container">
+            <button class="algo-btn ">Bubble Sort</button>
+            <button class="algo-btn">Selection Sort</button>
+            <button class="algo-btn">Insertion Sort</button>
+            <button class="algo-btn">Merge Sort</button>
+            <button class="algo-btn">Quicksort</button>
+            <button class="algo-btn">Heapsort</button>
+            <button id="sort">Sort</button>
+        </div>
+        <div id="change-container">
+            <button id="randomize">Randomize</button>
+            <div id="sliders">
+                <div class="slider-container">
+                    <label>Array Size</label>
+                    <input type="range" id="size-slider" class="slider" autocomplete="off">
+                </div>
+                <div class="slider-container">
+                    <label>Speed</label>
+                    <input type="range" id="speed-slider" class="slider" autocomplete="off">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="bubbleSort.js"></script>
+    <script src="practice.js"></script>
+
+</body>
+
+</html>
