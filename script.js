@@ -215,3 +215,7 @@ window.addEventListener("load", function () {
 
 });
 
+// TODO: dialog on algo btn hover
+// ip array by user
+// heading
+// graph plot y axis
