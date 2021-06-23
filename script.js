@@ -37,6 +37,7 @@ let element_width_max;
 let margin_element;
 
 let algo_selected;
+let sort_state = "Unsorted";
 
 let createArray = () => {
     arr = [];
@@ -70,7 +71,7 @@ let setColor = (id, color) => {
 let setColorRange = (p, r, color) => {
     for (let i = p; i <= r; i++) {
         document.querySelector("#e" + i).style.backgroundColor = color;// TODO: style
-        console.log("scr");
+        // console.log("scr");
     }
 }
 
@@ -79,7 +80,7 @@ let swap = (a, b) => {
     [arr[a], arr[b]] = [arr[b], arr[a]];
     let h1 = document.querySelector("#e" + a).style.height;
     let h2 = document.querySelector("#e" + b).style.height;
-    console.log(h1, h2);
+    // console.log(h1, h2);
     // set
     // console.log(document.querySelector("#e" + a).height);
     // console.log(document.querySelector("#e" + b).height);
@@ -137,17 +138,19 @@ window.addEventListener("load", function () {
 
     randomBtn.addEventListener("click", function () {
         createArray();
+        sort_state = "Unsorted";
     })
     let algoButtons = this.document.querySelectorAll(".algo-btn");
     // console.log(algoButtons);
     for (let i = 0; i < algoButtons.length; i++) {
         // console.log(algoButtons[i]);
         algoButtons[i].addEventListener("click", function (e) {
+            e.preventDefault();
             algo_selected = e.currentTarget.innerHTML;
             // console.log(algo_selected);
             let activeAlgo = document.querySelector(".algo-btn-active");
             if (activeAlgo) {
-                activeAlgo.classList.remove("algo-btn-active");// TODO: have to make elemnet non null
+                activeAlgo.classList.remove("algo-btn-active");
             }
             e.currentTarget.classList.add("algo-btn-active");
 
@@ -156,36 +159,96 @@ window.addEventListener("load", function () {
         })
     }
 
-    sortBtn.addEventListener("click", async function () {
-        sortBtn.disabled = true;
-        randomBtn.disabled = true;
-        sizeSlider.disabled = true;
+    function disableElements(status) {
+        // sortBtn.disabled = status;
+        randomBtn.disabled = status;
+        sizeSlider.disabled = status;
 
-        setColorRange(0, size - 1, UNSORTED);
-        if (algo_selected == "Bubble Sort")
-            await bubbleSort();
-        else if (algo_selected == "Selection Sort") {
-            // await selectionSort();
+        for (let i = 0; i < algoButtons.length; i++) {
+            algoButtons[i].disabled = status;
         }
-        else if (algo_selected == "Insertion Sort") {
-            // await insertionSort();
-        }
-        else if (algo_selected == "Merge Sort") {
-            // await mergeSort(0, size - 1);
-        }
-        else if (algo_selected == "Quicksort") {
-            // await quicksort(0, size - 1);
-        }
-        else if (algo_selected == "Heapsort") {
-            // await heapsort();
-        }
-        else {
+    }
+
+    sortBtn.addEventListener("click", async function () {
+        // sortBtn.disabled = true;
+        // randomBtn.disabled = true;
+        // sizeSlider.disabled = true;
+
+        // for(let i = 0; i < algoButtons.length; i++) {
+        //     algoButtons[i].disabled = true;
+        // }
+        // disableElements(true);
+        console.log("here");
+        if (algo_selected) {
+            // disableElements(true);
+            if (sort_state == "Sort") {
+                disableElements(false);
+                sortBtn.innerText = "Sort";
+                sort_state = "Pause";
+            } else if (sort_state == "Pause") {
+                disableElements(true);
+                sortBtn.innerText = "Pause";
+                sort_state = "Sort";
+            } else {
+                disableElements(true);
+                sortBtn.innerText = "Pause";
+                sort_state = "Sort";
+                setColorRange(0, size - 1, UNSORTED);
+                if (algo_selected == "Bubble Sort")
+                    await bubbleSort();
+                else if (algo_selected == "Selection Sort") {
+                    // await selectionSort();
+                }
+                else if (algo_selected == "Insertion Sort") {
+                    // await insertionSort();
+                }
+                else if (algo_selected == "Merge Sort") {
+                    // await mergeSort(0, size - 1);
+                }
+                else if (algo_selected == "Quicksort") {
+                    // await quicksort(0, size - 1);
+                }
+                else if (algo_selected == "Heapsort") {
+                    // await heapsort();
+                }   
+            }
+            // disableElements(false);
+        } else {
             document.querySelector("#no-algo-warning").classList.remove('display-none');
-            document.querySelector("#no-algo-warning").classList.add('display-flex');
+            document.querySelector("#no-algo-warning").classList.add('display-flex')
         }
-        sortBtn.disabled = false;
-        randomBtn.disabled = false;
-        sizeSlider.disabled = false;
+
+        // setColorRange(0, size - 1, UNSORTED);
+        // if (algo_selected == "Bubble Sort")
+        //     await bubbleSort();
+        // else if (algo_selected == "Selection Sort") {
+        //     // await selectionSort();
+        // }
+        // else if (algo_selected == "Insertion Sort") {
+        //     // await insertionSort();
+        // }
+        // else if (algo_selected == "Merge Sort") {
+        //     // await mergeSort(0, size - 1);
+        // }
+        // else if (algo_selected == "Quicksort") {
+        //     // await quicksort(0, size - 1);
+        // }
+        // else if (algo_selected == "Heapsort") {
+        //     // await heapsort();
+        // }
+        // else {
+        //     document.querySelector("#no-algo-warning").classList.remove('display-none');
+        //     document.querySelector("#no-algo-warning").classList.add('display-flex');
+        // }
+        // disableElements(false);
+
+        // for (let i = 0; i < algoButtons.length; i++) {
+        //     algoButtons[i].disabled = false;
+        // }
+
+        // sortBtn.disabled = false;
+        // randomBtn.disabled = false;
+        // sizeSlider.disabled = false;
     })
     document.querySelector("#speed-slider").addEventListener("input", function (e) {
         // console.log(e.currentTarget.value);
@@ -219,3 +282,4 @@ window.addEventListener("load", function () {
 // ip array by user
 // heading
 // graph plot y axis
+// disable selection
