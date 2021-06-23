@@ -6,7 +6,10 @@ async function sortWait() {
     return new Promise(function checkState(resolve) {
         setInterval(() => {
             if(sort_state == "Sort") {
-                resolve();
+                resolve("Sort");
+            }
+            if(sort_state == "Unsorted") {
+                resolve("Unsorted");
             }
         }, 100);
     })
@@ -19,8 +22,15 @@ async function bubbleSort() {
     for (i = 0; i < size - 1; i++) {
         for (j = 0; j < size - i - 1; j++) {
             if(sort_state == "Pause") {
-                await sortWait();
-            }
+                let state = await sortWait();
+                if(state == "Unsorted") {
+                    arr[0].style.backgroundColor = UNSORTED; 
+                    break loop;
+                }
+            } 
+            // else if(sort_state == "Unsorted") {
+            //     break loop;
+            // }
             console.log(i, j);
             // console.log(i, j);
             await sleep(delay);

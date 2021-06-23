@@ -50,7 +50,10 @@ let createArray = () => {
         let element = document.createElement("div");
         element.setAttribute("id", "e" + i);
         element.setAttribute("class", "element");
-        element.style.backgroundColor = UNSORTED;
+        // setTimeout(() => {
+            element.style.backgroundColor = UNSORTED;
+        // }, 1);
+        // element.style.backgroundColor = UNSORTED;
         element.style.width = element_width.toString() + "px";
         element.style.height = ele.toString() + "px";
         element.style.marginLeft = margin_element + 'px';
@@ -137,8 +140,12 @@ window.addEventListener("load", function () {
     createArray();
 
     randomBtn.addEventListener("click", function () {
-        createArray();
         sort_state = "Unsorted";
+        disableElements(false);
+        // setTimeout(() => {    
+        createArray();
+        // arr[0].style.backgroundColor = UNSORTED;
+        // }, 80);
     })
     let algoButtons = this.document.querySelectorAll(".algo-btn");
     // console.log(algoButtons);
@@ -162,11 +169,19 @@ window.addEventListener("load", function () {
     function disableElements(status) {
         // sortBtn.disabled = status;
         randomBtn.disabled = status;
-        sizeSlider.disabled = status;
+        console.log(status, sort_state);
+        if (status == true || sort_state == "Unsorted") {
+            sizeSlider.disabled = status;
 
-        for (let i = 0; i < algoButtons.length; i++) {
-            algoButtons[i].disabled = status;
+            for (let i = 0; i < algoButtons.length; i++) {
+                algoButtons[i].disabled = status;
+            }
         }
+        // sizeSlider.disabled = status;
+
+        // for (let i = 0; i < algoButtons.length; i++) {
+        //     algoButtons[i].disabled = status;
+        // }
     }
 
     sortBtn.addEventListener("click", async function () {
@@ -210,7 +225,7 @@ window.addEventListener("load", function () {
                 }
                 else if (algo_selected == "Heapsort") {
                     // await heapsort();
-                }   
+                }
             }
             // disableElements(false);
         } else {
