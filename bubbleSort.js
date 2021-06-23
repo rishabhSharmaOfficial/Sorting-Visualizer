@@ -25,7 +25,7 @@ async function bubbleSort() {
                 let state = await sortWait();
                 if(state == "Unsorted") {
                     arr[0].style.backgroundColor = UNSORTED; 
-                    break loop;
+                    break 466;
                 }
             } 
             // else if(sort_state == "Unsorted") {
@@ -54,5 +54,13 @@ async function bubbleSort() {
     }
 
     setColor(0, SORTED);
+    sorted();
+
     // TODO: set state to unsorted
+}
+
+function sorted() {
+    isSorted = true;
+    sortBtn.click();
+
 }

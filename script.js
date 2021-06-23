@@ -38,6 +38,7 @@ let margin_element;
 
 let algo_selected;
 let sort_state = "Unsorted";
+let isSorted = false;
 
 let createArray = () => {
     arr = [];
@@ -51,7 +52,7 @@ let createArray = () => {
         element.setAttribute("id", "e" + i);
         element.setAttribute("class", "element");
         // setTimeout(() => {
-            element.style.backgroundColor = UNSORTED;
+        element.style.backgroundColor = UNSORTED;
         // }, 1);
         // element.style.backgroundColor = UNSORTED;
         element.style.width = element_width.toString() + "px";
@@ -141,6 +142,7 @@ window.addEventListener("load", function () {
 
     randomBtn.addEventListener("click", function () {
         sort_state = "Unsorted";
+        isSorted = false;
         disableElements(false);
         // setTimeout(() => {    
         createArray();
@@ -161,8 +163,8 @@ window.addEventListener("load", function () {
             }
             e.currentTarget.classList.add("algo-btn-active");
 
-            document.querySelector("#no-algo-warning").classList.remove("display-flex");
-            document.querySelector("#no-algo-warning").classList.add("display-none");
+            // document.querySelector("#no-algo-warning").classList.remove("display-flex");
+            // document.querySelector("#no-algo-warning").classList.add("display-none");
         })
     }
 
@@ -196,7 +198,23 @@ window.addEventListener("load", function () {
         console.log("here");
         if (algo_selected) {
             // disableElements(true);
-            if (sort_state == "Sort") {
+            if (isSorted) {
+                // modal
+                if (!document.querySelector("#no-algo-warning")) {
+
+                    let modal = document.createElement("h5");
+                    modal.setAttribute("id", "no-algo-warning");
+                    modal.setAttribute("class", "display-flex");
+                    modal.innerText = "Sorted!";
+                    arrayContainer.appendChild(modal);
+                    setTimeout(() => {
+                        modal.remove();
+                    }, 1000);
+                }
+                disableElements(false);
+                sortBtn.innerText = "Sort";
+                sort_state = "Pause";
+            } else if (sort_state == "Sort") {
                 disableElements(false);
                 sortBtn.innerText = "Sort";
                 sort_state = "Pause";
@@ -229,8 +247,23 @@ window.addEventListener("load", function () {
             }
             // disableElements(false);
         } else {
-            document.querySelector("#no-algo-warning").classList.remove('display-none');
-            document.querySelector("#no-algo-warning").classList.add('display-flex')
+            // <h5 id="no-algo-warning" class="display-none">No Algorithm Selected!</h5>
+            if (!document.querySelector("#no-algo-warning")) {
+                let modal = document.createElement("h5");
+                modal.setAttribute("id", "no-algo-warning");
+                modal.setAttribute("class", "display-flex");
+                modal.innerText = "No Algorithm Selected!";
+                arrayContainer.appendChild(modal);
+                setTimeout(() => {
+                    modal.remove();
+                }, 1000);
+            }
+            // document.querySelector("#no-algo-warning").classList.remove('display-none');
+            // document.querySelector("#no-algo-warning").classList.add('display-flex');
+            // setTimeout(() => {
+            //     document.querySelector("#no-algo-warning").classList.remove("display-flex");
+            //     document.querySelector("#no-algo-warning").classList.add("display-none");
+            // }, 1200);
         }
 
         // setColorRange(0, size - 1, UNSORTED);
@@ -293,8 +326,15 @@ window.addEventListener("load", function () {
 
 });
 
-// TODO: dialog on algo btn hover
-// ip array by user
+// TODO: 
+// bug: when array is sorted it remains in sort state: solved
+// dialog on algo btn hover
+// ip array by user[maybe, if time premits]
 // heading
-// graph plot y axis
-// disable selection
+// graph plot y axis[no]
+// disable selection[done]
+// insertion[]
+// selection[]
+// merge[]
+// quick[]
+// heap[]

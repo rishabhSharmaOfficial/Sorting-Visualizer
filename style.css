@@ -4,7 +4,7 @@
 }
 body {
      margin: 0;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 * {
@@ -20,7 +20,8 @@ body {
     height: 100px;
     width: 400px;
     font-size: 30px;
-    margin: 50px auto;
+    /* margin: 50px auto; */
+    margin: auto auto;
     /* box-shadow: 2px 3px 10px 2px rgb(57, 61, 141); */
     /* border: 1px solid red; */
     background-color: rgba(0, 89, 255, 0.301);
@@ -58,6 +59,8 @@ body {
     display: flex;
     flex-direction: column-reverse;
     position: relative;
+
+    border-radius: 15px;
 }
 
 #array {
@@ -105,7 +108,7 @@ body {
 }
 
 .algo-btn:hover, .algo-btn-active {
-    background-color: #ccc;
+    background-color: #ccc; 
     color: #222;
 }
 
