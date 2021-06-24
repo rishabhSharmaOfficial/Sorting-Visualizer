@@ -26,6 +26,15 @@ const SELECTED = 'blueviolet';
 const LEFT = 'gold';
 const RIGHT = 'orangered';
 
+let sort_flag = true;
+
+// const UNSORTED = 'deepskyblue';
+// const SORTED = 'mediumspringgreen';
+// const COMPARE = 'crimson';
+// const SELECTED = 'crimson';
+// const LEFT = 'crimson';
+// const RIGHT = 'crimson';
+
 let size; // most recent size of array
 let delay;
 
@@ -64,8 +73,12 @@ let createArray = () => {
 }
 // createArray();
 
+
+
 let setHeight = (id, height) => {
     document.querySelector("#e" + id).style.height = height;
+    
+    console.log(document.querySelector("#e" + id).style.height, height);
 }
 
 let setColor = (id, color) => {
@@ -199,6 +212,7 @@ window.addEventListener("load", function () {
         if (algo_selected) {
             // disableElements(true);
             if (isSorted) {
+                console.log(isSorted);
                 // modal
                 if (!document.querySelector("#no-algo-warning")) {
 
@@ -227,22 +241,39 @@ window.addEventListener("load", function () {
                 sortBtn.innerText = "Pause";
                 sort_state = "Sort";
                 setColorRange(0, size - 1, UNSORTED);
-                if (algo_selected == "Bubble Sort")
+
+                function sorted() {
+                    isSorted = true;
+                    sortBtn.click();
+                }
+
+                sort_flag = true;
+                if (algo_selected == "Bubble Sort") {
                     await bubbleSort();
+                }
                 else if (algo_selected == "Selection Sort") {
-                    // await selectionSort();
+                    await selectionSort();
+                    // sorted();
                 }
                 else if (algo_selected == "Insertion Sort") {
-                    // await insertionSort();
+                    await insertionSort();
+                    // sorted();
                 }
                 else if (algo_selected == "Merge Sort") {
-                    // await mergeSort(0, size - 1);
+                    await mergeSort(0, size - 1);
+                    // sorted();
                 }
                 else if (algo_selected == "Quicksort") {
-                    // await quicksort(0, size - 1);
+                    console.log("hello");
+                    await quicksort(0, size - 1);
+                    // sorted();
                 }
                 else if (algo_selected == "Heapsort") {
-                    // await heapsort();
+                    await heapsort();
+                    // sorted();
+                }
+                if (sort_flag) {
+                    sorted();
                 }
             }
             // disableElements(false);
@@ -325,16 +356,20 @@ window.addEventListener("load", function () {
     }, true)
 
 });
+// bugs:
+// when array is sorted it remains in sort state: [solved].
+// when array is paused and randomized is clicked we get a bug[solved]
+// sorted is called everytime, even if the array is not sorted[solved]
 
 // TODO: 
-// bug: when array is sorted it remains in sort state: solved
-// dialog on algo btn hover
-// ip array by user[maybe, if time premits]
-// heading
+// dialog on algo btn hover []
+// data retention[]
+// ip array by user[no]
+// heading[done]
 // graph plot y axis[no]
 // disable selection[done]
-// insertion[]
-// selection[]
-// merge[]
-// quick[]
-// heap[]
+// insertion[done]
+// selection[done]
+// merge[done]
+// quick[done]
+// heap[done]
