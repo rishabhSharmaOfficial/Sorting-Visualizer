@@ -179,6 +179,23 @@ window.addEventListener("load", function () {
             // document.querySelector("#no-algo-warning").classList.remove("display-flex");
             // document.querySelector("#no-algo-warning").classList.add("display-none");
         })
+
+
+        let theoryContainer = document.querySelector("#theory-container");
+        algoButtons[i].addEventListener("mouseover", function(e) {
+            console.log(e.currentTarget.innerText);
+            theoryContainer.style.display = "flex";
+            // theoryContainer.innerText = getTheory(e.currentTarget.innerText);
+            console.log(algoTheory[i]);
+            console.log(theoryContainer.innerText);
+            theoryContainer.innerText = algoTheory[i].theory;
+        })
+        algoButtons[i].addEventListener("mouseleave", function(e) {
+            console.log("mose");
+            theoryContainer.style.display = "none";
+        })
+
+
     }
 
     function disableElements(status) {

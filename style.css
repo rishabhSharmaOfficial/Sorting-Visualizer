@@ -108,14 +108,49 @@ body {
 }
 
 .algo-btn:hover, .algo-btn-active {
-    background-color: #ccc; 
-    color: #222;
+     /* background-color: #ccc;  */
+    /* color: #222;  */
+    color: rgb(87, 1, 87);
+    background-color: #bbbdeb;
+    box-shadow: 1px 1px 1px 1px purple;
+    /* font-weight: 800; */
+    /* color: #6200ff; */
 }
+.algo-btn-active {
+    border: 3px solid purple;
+}
+
+
+#theory-container {
+    height: 95%;
+    width: 98%;
+    background-color: rgba(120, 72, 175, 0.808);
+    /* display: flex; */
+    padding: 1rem;
+    position: absolute;
+    z-index: 2;
+    left: 1%;
+    right: 1%;
+    top: 2.5%;
+    bottom: 2.5%;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 0, 0, 0.438);
+    color: rgb(203, 224, 153);
+    font-weight: 400;
+    
+}
+
+
+
 
 #sort {
     float: right;
     background-color: mediumspringgreen;
     color: black;
+}
+
+#sort:hover {
+    transform: scale(1.05);
 }
 
 #sort:hover, #randomize:hover {

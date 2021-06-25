@@ -17,7 +17,7 @@
 
 <body>
     <div class="area">
-    <div class="container ">
+        <div class="container ">
             <ul class="circles">
                 <li></li>
                 <li></li>
@@ -30,39 +30,44 @@
                 <li></li>
                 <li></li>
             </ul>
-        <div id="array-container">
-            <div id="array"></div>
-            
-            <!-- <h5 id="no-algo-warning" class="display-none">No Algorithm Selected!</h5> -->
-        </div>
-        <div id="algo-container">
-            <button class="algo-btn ">Bubble Sort</button>
-            <button class="algo-btn">Selection Sort</button>
-            <button class="algo-btn">Insertion Sort</button>
-            <button class="algo-btn">Merge Sort</button>
-            <button class="algo-btn">Quicksort</button>
-            <button class="algo-btn">Heapsort</button>
-            <button id="sort">Sort</button>
-        </div>
-        <div id="change-container">
-            <button id="randomize">Randomize</button>
-            <div id="sliders">
-                <div class="slider-container">
-                    <label>Array Size</label>
-                    <input type="range" id="size-slider" class="slider" autocomplete="off">
+            <div id="array-container">
+                <div id="array"></div>
+
+                <div id="theory-container" class="display-none">
+                    <!-- <button>Close</button> -->
                 </div>
-                <div class="slider-container">
-                    <label>Speed</label>
-                    <input type="range" id="speed-slider" class="slider" autocomplete="off">
+
+                <!-- <h5 id="no-algo-warning" class="display-none">No Algorithm Selected!</h5> -->
+            </div>
+            <div id="algo-container">
+                <button class="algo-btn ">Bubble Sort</button>
+                <button class="algo-btn">Selection Sort</button>
+                <button class="algo-btn">Insertion Sort</button>
+                <button class="algo-btn">Merge Sort</button>
+                <button class="algo-btn">Quicksort</button>
+                <button class="algo-btn">Heapsort</button>
+                <button id="sort">Sort</button>
+            </div>
+            <div id="change-container">
+                <button id="randomize">Randomize</button>
+                <div id="sliders">
+                    <div class="slider-container">
+                        <label>Array Size</label>
+                        <input type="range" id="size-slider" class="slider" autocomplete="off">
+                    </div>
+                    <div class="slider-container">
+                        <label>Speed</label>
+                        <input type="range" id="speed-slider" class="slider" autocomplete="off">
+                    </div>
                 </div>
             </div>
+            <div class="name block">&lt Sorting Visualizer /&gt</div>
         </div>
-        <div class="name block">&lt Sorting Visualizer /&gt</div>
-    </div>
 
-    <script src="script.js"></script>
-    <script src="bubbleSort.js"></script>
-    <script src="practice.js"></script>
+        <script src="script.js"></script>
+        <script src="bubbleSort.js"></script>
+        <script src="algoTheory.js"></script>
+        <script src="practice.js"></script>
     </div>
 </body>
 
