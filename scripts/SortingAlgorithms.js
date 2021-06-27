@@ -1,7 +1,9 @@
+// Sleep function helps to dalay the animation
 async function sleep(delay) {
     await new Promise(done => setTimeout(() => done(), delay / 2));
 }
 
+// returns a promise resolved when states changes to sort or unsorted
 async function sortWait() {
     return new Promise(function checkState(resolve) {
         setInterval(() => {
@@ -14,31 +16,19 @@ async function sortWait() {
         }, 100);
     })
 }
-
+//**********bubble sort***************
 async function bubbleSort() {
     var i, j;
     await sleep(delay);
-    loop:
     for (i = 0; i < size - 1; i++) {
         for (j = 0; j < size - i - 1; j++) {
             if (sort_state == "Pause") {
                 let state = await sortWait();
                 if (state == "Unsorted") {
-                    // if(arr[0]) {
-                    // arr[0].style.backgroundColor = UNSORTED; 
-                    // setColor(0, UNSORTED);
-                    // }
-                    // break loop;
-                    // isSorted = false;
                     sort_flag = false;
                     return;
                 }
             }
-            // else if(sort_state == "Unsorted") {
-            //     break loop;
-            // }
-            console.log(i, j);
-            // console.log(i, j);
             await sleep(delay);
 
             setColor(j, COMPARE);
@@ -60,11 +50,10 @@ async function bubbleSort() {
     }
 
     setColor(0, SORTED);
-    // sorted();
-
-    // TODO: set state to unsorted
 }
 
+
+//**********insertion sort***************/
 async function insertionSort() {
     var i, j, key;
     await sleep(delay);
@@ -73,7 +62,6 @@ async function insertionSort() {
     await sleep(delay);
 
     setColor(0, SORTED);
-    loop:
     for (i = 1; i < size; i++) {
         await sleep(delay);
 
@@ -87,14 +75,10 @@ async function insertionSort() {
             if (sort_state == "Pause") {
                 let state = await sortWait();
                 if (state == "Unsorted") {
-                    // arr[0].style.backgroundColor = UNSORTED;
-                    // break loop;
                     sort_flag = false;
                     return;
                 }
             }
-
-
             setColor(j, COMPARE);
             await sleep(delay);
 
@@ -111,10 +95,9 @@ async function insertionSort() {
 
         setColor(j + 1, SORTED);
     }
-    // sorted();
 }
 
-
+//**********selection sort***************/
 async function selectionSort() {
     var i, j, min_idx;
     loop:
@@ -128,8 +111,6 @@ async function selectionSort() {
             if (sort_state == "Pause") {
                 let state = await sortWait();
                 if (state == "Unsorted") {
-                    // arr[0].style.backgroundColor = UNSORTED;
-                    // break loop;
                     sort_flag = false;
                     return;
                 }
@@ -167,9 +148,10 @@ async function selectionSort() {
         setColor(i, SORTED);
     }
     setColor(size - 1, SORTED);
-    // sorted();
 }
 
+
+//**********merge sort***************/
 async function merge(p, q, r) {
     if (sort_flag == false) {
         return;
@@ -178,8 +160,6 @@ async function merge(p, q, r) {
     if (sort_state == "Pause") {
         let state = await sortWait();
         if (state == "Unsorted") {
-            // arr[0].style.backgroundColor = UNSORTED;
-            // return;
             sort_flag = false;
             return;
         }
@@ -213,8 +193,6 @@ async function merge(p, q, r) {
         if (sort_state == "Pause") {
             let state = await sortWait();
             if (state == "Unsorted") {
-                // arr[0].style.backgroundColor = UNSORTED;
-                // return;
                 sort_flag = false;
                 return;
             }
@@ -259,9 +237,7 @@ async function mergeSort(p, r) {
 }
 
 
-
-
-
+//**********quick sort***************/
 async function partition(p, r) {
     if(sort_flag == false) {
         return;
@@ -281,7 +257,6 @@ async function partition(p, r) {
                 return;
             }
         }
-
 
         await sleep(delay);
 
@@ -311,9 +286,6 @@ async function partition(p, r) {
 }
 
 async function quicksort(p, r) {
-    // if(sort_flag) {
-    //     return;
-    // }
     if (p < r) {
 
         console.log(p, r);
@@ -337,6 +309,7 @@ async function quicksort(p, r) {
 }
 
 
+//**********heap sort***************/
 var heapSize;
 
 function left(i) {
@@ -354,8 +327,6 @@ async function maxHeapify(i) {
     if (sort_state == "Pause") {
         let state = await sortWait();
         if (state == "Unsorted") {
-            // arr[0].style.backgroundColor = UNSORTED;
-            // return;
             sort_flag = false;
             return;
         }

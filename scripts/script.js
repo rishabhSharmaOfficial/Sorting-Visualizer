@@ -26,14 +26,8 @@ const SELECTED = 'blueviolet';
 const LEFT = 'gold';
 const RIGHT = 'orangered';
 
+// variable to check the sorting animation is shorted or not
 let sort_flag = true;
-
-// const UNSORTED = 'deepskyblue';
-// const SORTED = 'mediumspringgreen';
-// const COMPARE = 'crimson';
-// const SELECTED = 'crimson';
-// const LEFT = 'crimson';
-// const RIGHT = 'crimson';
 
 let size; // most recent size of array
 let delay;
@@ -55,15 +49,10 @@ let createArray = () => {
     for (let i = 0; i < size; i++) {
         let ele = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
         arr.push(ele);
-        // console.log(ele.toString() + 'px');
-
         let element = document.createElement("div");
         element.setAttribute("id", "e" + i);
         element.setAttribute("class", "element");
-        // setTimeout(() => {
         element.style.backgroundColor = UNSORTED;
-        // }, 1);
-        // element.style.backgroundColor = UNSORTED;
         element.style.width = element_width.toString() + "px";
         element.style.height = ele.toString() + "px";
         element.style.marginLeft = margin_element + 'px';
@@ -71,14 +60,9 @@ let createArray = () => {
         array.appendChild(element);
     }
 }
-// createArray();
-
-
 
 let setHeight = (id, height) => {
     document.querySelector("#e" + id).style.height = height;
-    
-    console.log(document.querySelector("#e" + id).style.height, height);
 }
 
 let setColor = (id, color) => {
@@ -87,29 +71,19 @@ let setColor = (id, color) => {
 
 let setColorRange = (p, r, color) => {
     for (let i = p; i <= r; i++) {
-        document.querySelector("#e" + i).style.backgroundColor = color;// TODO: style
-        // console.log("scr");
+        document.querySelector("#e" + i).style.backgroundColor = color;
     }
 }
 
 let swap = (a, b) => {
-    // console.log("first", arr[a], arr[b]);
     [arr[a], arr[b]] = [arr[b], arr[a]];
     let h1 = document.querySelector("#e" + a).style.height;
     let h2 = document.querySelector("#e" + b).style.height;
-    // console.log(h1, h2);
-    // set
-    // console.log(document.querySelector("#e" + a).height);
-    // console.log(document.querySelector("#e" + b).height);
     setHeight(a, h2);
     setHeight(b, h1);
-    // console.log(document.querySelector("#e" + a).height);
-    // console.log(document.querySelector("#e" + b).height);
-    // console.log("second", arr[a], arr[b]);
 }
 
 let updateValues = () => {
-    // array_container_width = Math.floor(arrayContainer.getAttribute("width"));
     array_container_width = arrayContainer.getBoundingClientRect().width;
 
     element_width_max = Math.floor(array_container_width / 20);
@@ -119,25 +93,17 @@ let updateValues = () => {
     }
 
 }
-// let idx = 0;
 let findElementWidth = () => {
     array_container_width = arrayContainer.getBoundingClientRect().width;
-    // console.log(arrayContainer.style);
-    // console.log(arrayContainer.style.width);
-    // idx++;
-    // console.log(idx , array_container_width);
     element_width = Math.floor(array_container_width / size);
-    // console.log("first", element_width, margin_element);
     element_width -= 2 * margin_element;
 
     if (element_width > element_width_max) {
         element_width = element_width_max;
     }
-    // console.log(element_width);
 }
 
 window.addEventListener("load", function () {
-    // console.log("load");
     sizeSlider.setAttribute("min", MIN_SIZE);
     sizeSlider.setAttribute('max', MAX_SIZE);
     sizeSlider.setAttribute('value', DEFAULT_SIZE);
@@ -157,51 +123,33 @@ window.addEventListener("load", function () {
         sort_state = "Unsorted";
         isSorted = false;
         disableElements(false);
-        // setTimeout(() => {    
         createArray();
-        // arr[0].style.backgroundColor = UNSORTED;
-        // }, 80);
     })
     let algoButtons = this.document.querySelectorAll(".algo-btn");
-    // console.log(algoButtons);
     for (let i = 0; i < algoButtons.length; i++) {
-        // console.log(algoButtons[i]);
         algoButtons[i].addEventListener("click", function (e) {
             e.preventDefault();
             algo_selected = e.currentTarget.innerHTML;
-            // console.log(algo_selected);
             let activeAlgo = document.querySelector(".algo-btn-active");
             if (activeAlgo) {
                 activeAlgo.classList.remove("algo-btn-active");
             }
             e.currentTarget.classList.add("algo-btn-active");
-
-            // document.querySelector("#no-algo-warning").classList.remove("display-flex");
-            // document.querySelector("#no-algo-warning").classList.add("display-none");
         })
 
 
         let theoryContainer = document.querySelector("#theory-container");
         algoButtons[i].addEventListener("mouseover", function(e) {
-            console.log(e.currentTarget.innerText);
             theoryContainer.style.display = "flex";
-            // theoryContainer.innerText = getTheory(e.currentTarget.innerText);
-            console.log(algoTheory[i]);
-            console.log(theoryContainer.innerText);
             theoryContainer.innerText = algoTheory[i].theory;
         })
         algoButtons[i].addEventListener("mouseleave", function(e) {
-            console.log("mose");
             theoryContainer.style.display = "none";
         })
-
-
     }
 
     function disableElements(status) {
-        // sortBtn.disabled = status;
         randomBtn.disabled = status;
-        console.log(status, sort_state);
         if (status == true || sort_state == "Unsorted") {
             sizeSlider.disabled = status;
 
@@ -209,39 +157,27 @@ window.addEventListener("load", function () {
                 algoButtons[i].disabled = status;
             }
         }
-        // sizeSlider.disabled = status;
+    }
 
-        // for (let i = 0; i < algoButtons.length; i++) {
-        //     algoButtons[i].disabled = status;
-        // }
+    function showModal(text) {
+        if (!document.querySelector("#no-algo-warning")) {
+
+            let modal = document.createElement("h5");
+            modal.setAttribute("id", "no-algo-warning");
+            modal.setAttribute("class", "display-flex");
+            modal.innerText = text;
+            arrayContainer.appendChild(modal);
+            setTimeout(() => {
+                modal.remove();
+            }, 1000);
+        }
     }
 
     sortBtn.addEventListener("click", async function () {
-        // sortBtn.disabled = true;
-        // randomBtn.disabled = true;
-        // sizeSlider.disabled = true;
-
-        // for(let i = 0; i < algoButtons.length; i++) {
-        //     algoButtons[i].disabled = true;
-        // }
-        // disableElements(true);
-        console.log("here");
         if (algo_selected) {
-            // disableElements(true);
             if (isSorted) {
-                console.log(isSorted);
                 // modal
-                if (!document.querySelector("#no-algo-warning")) {
-
-                    let modal = document.createElement("h5");
-                    modal.setAttribute("id", "no-algo-warning");
-                    modal.setAttribute("class", "display-flex");
-                    modal.innerText = "Sorted!";
-                    arrayContainer.appendChild(modal);
-                    setTimeout(() => {
-                        modal.remove();
-                    }, 1000);
-                }
+                showModal("Sorted");
                 disableElements(false);
                 sortBtn.innerText = "Sort";
                 sort_state = "Pause";
@@ -270,84 +206,28 @@ window.addEventListener("load", function () {
                 }
                 else if (algo_selected == "Selection Sort") {
                     await selectionSort();
-                    // sorted();
                 }
                 else if (algo_selected == "Insertion Sort") {
                     await insertionSort();
-                    // sorted();
                 }
                 else if (algo_selected == "Merge Sort") {
                     await mergeSort(0, size - 1);
-                    // sorted();
                 }
                 else if (algo_selected == "Quicksort") {
-                    console.log("hello");
                     await quicksort(0, size - 1);
-                    // sorted();
                 }
                 else if (algo_selected == "Heapsort") {
                     await heapsort();
-                    // sorted();
                 }
                 if (sort_flag) {
                     sorted();
                 }
             }
-            // disableElements(false);
         } else {
-            // <h5 id="no-algo-warning" class="display-none">No Algorithm Selected!</h5>
-            if (!document.querySelector("#no-algo-warning")) {
-                let modal = document.createElement("h5");
-                modal.setAttribute("id", "no-algo-warning");
-                modal.setAttribute("class", "display-flex");
-                modal.innerText = "No Algorithm Selected!";
-                arrayContainer.appendChild(modal);
-                setTimeout(() => {
-                    modal.remove();
-                }, 1000);
-            }
-            // document.querySelector("#no-algo-warning").classList.remove('display-none');
-            // document.querySelector("#no-algo-warning").classList.add('display-flex');
-            // setTimeout(() => {
-            //     document.querySelector("#no-algo-warning").classList.remove("display-flex");
-            //     document.querySelector("#no-algo-warning").classList.add("display-none");
-            // }, 1200);
+            showModal("No Algorithm Selected!");
         }
-
-        // setColorRange(0, size - 1, UNSORTED);
-        // if (algo_selected == "Bubble Sort")
-        //     await bubbleSort();
-        // else if (algo_selected == "Selection Sort") {
-        //     // await selectionSort();
-        // }
-        // else if (algo_selected == "Insertion Sort") {
-        //     // await insertionSort();
-        // }
-        // else if (algo_selected == "Merge Sort") {
-        //     // await mergeSort(0, size - 1);
-        // }
-        // else if (algo_selected == "Quicksort") {
-        //     // await quicksort(0, size - 1);
-        // }
-        // else if (algo_selected == "Heapsort") {
-        //     // await heapsort();
-        // }
-        // else {
-        //     document.querySelector("#no-algo-warning").classList.remove('display-none');
-        //     document.querySelector("#no-algo-warning").classList.add('display-flex');
-        // }
-        // disableElements(false);
-
-        // for (let i = 0; i < algoButtons.length; i++) {
-        //     algoButtons[i].disabled = false;
-        // }
-
-        // sortBtn.disabled = false;
-        // randomBtn.disabled = false;
-        // sizeSlider.disabled = false;
     })
     document.querySelector("#speed-slider").addEventListener("input", function (e) {
-        // console.log(e.currentTarget.value);
         delay = WAITING_TIME * Math.pow(2, MAX_SPEED - e.currentTarget.value);
     })
     document.querySelector("#size-slider").addEventListener("input", function (e) {
@@ -357,7 +237,6 @@ window.addEventListener("load", function () {
     })
 
     window.addEventListener('resize', function (e) {
-        // console.log(this.window.innerWidth);
         if (array_container_width != Math.floor(arrayContainer.width)) {
             updateValues();
 
@@ -373,20 +252,4 @@ window.addEventListener("load", function () {
     }, true)
 
 });
-// bugs:
-// when array is sorted it remains in sort state: [solved].
-// when array is paused and randomized is clicked we get a bug[solved]
-// sorted is called everytime, even if the array is not sorted[solved]
 
-// TODO: 
-// dialog on algo btn hover []
-// data retention[]
-// ip array by user[no]
-// heading[done]
-// graph plot y axis[no]
-// disable selection[done]
-// insertion[done]
-// selection[done]
-// merge[done]
-// quick[done]
-// heap[done]

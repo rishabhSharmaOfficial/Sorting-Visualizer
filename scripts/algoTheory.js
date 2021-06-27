@@ -60,9 +60,6 @@ const algoTheory = [
                     Stable :No`
     }
 ]
-// console.log(algoTheory[0].BubbleSort);
-// console.log(
 function getTheory(algo) {
-    // console.log(algoTheory[algo]);
     return algoTheory[algo][0];
 }
