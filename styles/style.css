@@ -400,3 +400,30 @@ body {
 }
 
 /************************** logo animation ends ************************/
+
+@media screen and (max-width: 480px) {
+    
+    .algo-btn, #randomize, #sort{
+        font-size: 0.6rem;
+    }
+    #sliders, label{
+        font-size: 0.6rem;
+    }
+    #algo-container, .slider-container{
+        margin: 0.5rem;
+    }
+    .slider{
+        width: 70px;
+    }
+    #array-container{
+        margin-top: 0.5rem;
+    }
+    .block {
+        display: none;
+    }
+    #theory-container{
+        font-weight: 200px;
+        font-size: 12px;
+    }
+
+}
