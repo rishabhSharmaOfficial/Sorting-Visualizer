@@ -1,5 +1,3 @@
-### Note: 
-This Application is originally made for a hackathon organized by [Pepcoding](https://www.pepcoding.com/).
 
 # Sorting Visualizer web app
 
